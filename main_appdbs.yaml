@@ -13,3 +13,18 @@
       vars:
         satellite_activationkey: gpte-labs-rhel8
         satellite_org: prod
+
+    - name: Setup firewall
+      include_role:
+        name: firewall
+      vars:
+        firewall_services:
+          - postgresql
+        firewall_tcp_ports:
+        - 5432
+
+    - name: Install and Initialize Postgre12
+      include_role:
+        name: geerlingguy_edited.postgresql12
+      vars_files:
+        - vars/postgre_vars.yml
