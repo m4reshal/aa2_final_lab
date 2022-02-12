@@ -16,7 +16,8 @@ app_yum_packages:
   - gcc
   - libtool
   - python3
-  - python-psycopg2
+  - python3-psycopg2
+  #- python-psycopg2
 
 pip_dependencies:
   - virtualenv
