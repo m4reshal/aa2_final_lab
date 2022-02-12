@@ -1,4 +1,11 @@
 ---
+- name: Gather IP of DB node
+  setup:
+    gather_subset:
+    - 'network'
+  delegate_facts: true
+  delegate_to: groups.database_servers[0]
+
 - name: Add DB node to /etc/hosts file
   lineinfile:
     state: present
