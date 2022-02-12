@@ -10,6 +10,13 @@
     - debug:
         msg: "Start Flask App setup"
 
+    - name: Do Commond Tasks
+      include_role:
+        name: common
+      vars:
+        satellite_activationkey: gpte-labs-rhel8
+        satellite_org: prod
+
     #- name: Setup firewall
     #  include_role:
     #    name: firewall
