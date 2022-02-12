@@ -29,7 +29,7 @@
 
     - name: Check webserver for correct response
       uri:
-        url: "http://{{ hostvars[item].ansible_host }}:8080/"
+        url: "http://{{ hostvars[item].ansible_host }}"
         #url: "http://{{ hostvars[item].ansible_host }}/ping"
         #url: "http://frontend1/ping"
         return_content: yes
