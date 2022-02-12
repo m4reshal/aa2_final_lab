@@ -24,7 +24,7 @@
   command: /usr/pgsql-12/bin/postgresql-12-setup initdb
   when: not pgdata_dir_version.stat.exists
   become: true
-  become_user: "{{ postgresql_user }}"
+  #become_user: "{{ postgresql_user }}"
   # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
   vars:
     ansible_ssh_pipelining: true
