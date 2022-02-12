@@ -6,6 +6,7 @@
   yum:
     name:  "{{ postgresql_enablerepo }}"
     state: present
+    disable_gpg_check: true
 
 - name: Ensure PostgreSQL packages are installed.
   yum:
