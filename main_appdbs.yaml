@@ -28,3 +28,6 @@
     - name: Install and Initialize Postgre12
       include_role:
         name: geerlingguy_edited.postgresql12
+
+    - debug:
+        msg: "Finished Postgre12 setup"
