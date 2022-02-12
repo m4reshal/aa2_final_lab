@@ -2,6 +2,11 @@
 - name: Disable  Postgre of the Operating System
   shell: "dnf -qy module disable postgresql"
 
+- name: Ensure PostgreSQL12 repo is installed and enabled
+  yum:
+    name:  "{{ postgresql_enablerepo }}"
+    state: present
+
 - name: Ensure PostgreSQL packages are installed.
   yum:
     name: "{{ postgresql_packages }}"
