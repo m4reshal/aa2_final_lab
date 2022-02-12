@@ -1,0 +1,31 @@
+---
+- name: Play to setup Haproxy
+  hosts: load_balancers
+  gather_facts: false
+  become: true
+  tasks:
+    - debug:
+        msg: "Start HAproxy server setup"
+
+    - name: Do Commond Tasks
+      include_role:
+        name: common
+      vars:
+        satellite_activationkey: gpte-labs-rhel8
+        satellite_org: prod
+
+    - name: Setup firewall
+      include_role:
+        name: firewall
+      vars:
+        firewall_services:
+          - http
+        firewall_tcp_ports:
+          - 5000
+
+    - name: Setup HAproxy server
+      include_role:
+        name: install_haproxy
+
+    - debug:
+        msg: "Finished HAproxy server setup"
