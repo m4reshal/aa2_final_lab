@@ -11,11 +11,12 @@
   lineinfile:
     state: present
     path: /etc/hosts
-    line: "{{ hostvars[_host].ansible_host }} appdb1"
+    line: "{{ hostvars[_host].ansible_host }} appdb{{ loop_index }}"
     #line: "{{ hostvars[groups.database_servers[0]].ansible_default_ipv4.address }} appdb1"
   loop: "{{ groups['database_servers'] }}"
   loop_control:
     loop_var: _host
+    index_var: loop_index
 
 - name: Create flask user
   user:
