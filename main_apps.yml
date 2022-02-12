@@ -17,14 +17,14 @@
         satellite_activationkey: gpte-labs-rhel8
         satellite_org: prod
 
-    #- name: Setup firewall
-    #  include_role:
-    #    name: firewall
-    #  vars:
-    #    firewall_services:
-    #      - http
-    #    firewall_tcp_ports:
-    #      - 8080
+    - name: Setup firewall
+      include_role:
+        name: firewall
+      vars:
+        firewall_services:
+          - http
+        firewall_tcp_ports:
+          - 8080
 
     - name: Setup  Flask APP
       include_role:
