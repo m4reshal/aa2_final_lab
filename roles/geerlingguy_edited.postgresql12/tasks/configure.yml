@@ -9,6 +9,13 @@
   with_items: "{{ postgresql_global_config_options }}"
   notify: restart postgresql
 
+- name: Configure listen_addresses Parameter to listen on network interfaces
+  lineinfile:
+    dest: "{{ postgresql_config_path }}/postgresql.conf"
+    line: "listen_addresses = '*'"
+    insertafter: "#listen_addresses"
+  notify: restart postgresql
+
 - name: Configure host based authentication (if entries are configured).
   template:
     src: "pg_hba.conf.j2"
