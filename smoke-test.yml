@@ -37,5 +37,5 @@
       retries: 10
       delay: 1
       register: result
-      loop: "{{ groups['load_balancers'][0] }}"
+      loop: "{{ lookup(groups['load_balancers'][0], wantlist=True) }}"
       delegate_to: localhost
