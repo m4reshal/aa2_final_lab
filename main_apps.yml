@@ -10,18 +10,18 @@
     - debug:
         msg: "Start Flask App setup"
 
-    - name: Setup firewall
-      include_role:
-        name: firewall
-      vars:
-        firewall_services:
-          - http
-        firewall_tcp_ports:
-          - 8080
+    #- name: Setup firewall
+    #  include_role:
+    #    name: firewall
+    #  vars:
+    #    firewall_services:
+    #      - http
+    #    firewall_tcp_ports:
+    #      - 8080
 
-    - name: Setup apache server
+    - name: Setup  Flask APP
       include_role:
-        name: apache
+        name: install_flask
 
     - debug:
         msg: "Finished Flask App setup"
