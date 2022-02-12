@@ -1,2 +1,41 @@
 ---
-# tasks file for common
+- name: Gather network facts of Control node
+  setup:
+    gather_subset:
+      - 'network'
+  delegate_facts: true
+  delegate_to: control
+  #connection: local
+
+- name: Print DNS IP Before Configuring Servers 
+  debug:
+    msg: "{{ hostvars['control'].ansible_default_ipv4.address }}, {{ hostvars['control'].ansible_dns.nameservers.0 }} "
+
+- name: DNS IP updated
+   lineinfile:
+     state: present
+     path: /etc/sysconfig/network-scripts/ifcfg-eth0
+     line: "{{ item }}"
+   loop:
+     - PEERDNS=no
+     - DNS1={{ hostvars.control.ansible_default_ipv4.address }}
+   register: network_update
+
+- name: restart network manager
+  service:
+    name: NetworkManager
+    state: restarted
+  when: network_update.changed | bool
+
+- name: install katello-ca-consumer package
+  yum:
+    name: http://satellite.example.com/pub/katello-ca-consumer-latest.noarch.rpm
+    state: present
+    disable_gpg_check: true
+
+- name: register system and attach subs
+  redhat_subscription:
+    state: present
+    activationkey: "{{ satellite_activationkey }}"
+    org_id: "{{ satellite_org }}"
+    auto_attach: true
