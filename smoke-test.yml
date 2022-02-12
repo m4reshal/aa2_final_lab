@@ -29,11 +29,11 @@
 
     - name: Check webserver for correct response
       uri:
-        url: "http://{{ hostvars[item].ansible_host }}/ping"
-        #url: "http://{{ hostvars[\"{{ groups['load_balancers'][0] }}\"].ansible_host }}/ping"
+        url: "http://{{ hostvars[item].ansible_host }}:8080/"
+        #url: "http://{{ hostvars[item].ansible_host }}/ping"
         #url: "http://frontend1/ping"
         return_content: yes
-      until: '"alive" in result.content'
+      until: '"Ansible Automation Platform" in result.content'
       retries: 10
       delay: 1
       register: result
